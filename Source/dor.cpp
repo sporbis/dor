@@ -53,7 +53,7 @@ void create_checksum(std::string target)
 
 	for (const auto& entry : fs::recursive_directory_iterator(target)) {
 		fs::path path = entry.path();
-		std::string filename = path.filename().u8string();
+		std::string filename = path.filename().string();
 
 		if (fs::is_regular_file(entry) && filename[0] != '.' && path.extension() != ".md5") {
 			std::string md5File = path.string() + ".md5";
@@ -63,7 +63,7 @@ void create_checksum(std::string target)
 			}
 			else {
 				std::ofstream outfile(md5File);
-				outfile << generate_hash(path.u8string());
+				outfile << generate_hash(path.string());
 				outfile.close();
 
 				okCount++;
@@ -89,7 +89,7 @@ void verify(std::string target)
 		if (fs::is_regular_file(entry) && entry.path().extension() == ".md5") {
 			fs::path md5File = entry.path();
 			fs::path targetFile = md5File.parent_path() / md5File.stem();
-			std::string md5String = generate_hash(targetFile.u8string());
+			std::string md5String = generate_hash(targetFile.string());
 			std::string originalMd5 = read_file(md5File);
 
 			if (originalMd5 == md5String) {
