@@ -4,8 +4,6 @@ set(CMAKE_CXX_STANDARD 17)
 
 project(dor)
 
-find_package(OpenSSL REQUIRED)
-
 add_subdirectory(ThirdParty EXCLUDE_FROM_ALL)
 
 file(
@@ -22,7 +20,7 @@ foreach(source IN LISTS SOURCES)
     source_group("${source_path_msvc}" FILES "${source}")
 endforeach()
 
-target_link_libraries(dor cxxopts ${OPENSSL_LIBRARIES})
+target_link_libraries(dor cxxopts ssl)
 
 target_include_directories(dor PUBLIC ${OPENSSL_INCLUDE_DIR})
 

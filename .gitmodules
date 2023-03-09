@@ -1,0 +1,3 @@
+[submodule "ThirdParty/openssl-cmake"]
+	path = ThirdParty/openssl-cmake
+	url = https://github.com/sporbis/openssl-cmake.git
